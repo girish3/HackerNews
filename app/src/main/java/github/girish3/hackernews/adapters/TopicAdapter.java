@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,10 +20,10 @@ import github.girish3.hackernews.data.Topic;
  */
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
 
-    private final ArrayList<Topic> mTopics;
+    private final List<Topic> mTopics;
     private final Context mContext;
 
-    public TopicAdapter(Context context, ArrayList<Topic> topics) {
+    public TopicAdapter(Context context, List<Topic> topics) {
         mTopics = topics;
         mContext = context;
     }
@@ -46,10 +47,10 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvPoints.setText(mContext.getString(R.string.points_text, topic.getPoints()));
         holder.tvAuthor.setText(mContext.getString(R.string.author_text, topic.getAuthor()));
         holder.tvTime.setText(getFormattedTime(topic.getTime()));
-        holder.tvCommentCount.setText(mContext.getString(R.string.author_text, topic.getCommentCount()));
+        holder.tvCommentCount.setText(mContext.getString(R.string.comment_text, topic.getCommentCount()));
     }
 
-    private String getFormattedTime(int time) {
+    private String getFormattedTime(long time) {
         return "-1 hours ago";
     }
 

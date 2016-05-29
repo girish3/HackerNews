@@ -1,22 +1,25 @@
 package github.girish3.hackernews.data;
 
+import java.util.List;
+
 /**
  * Created by Girish on 28/05/16.
  */
 public class Topic {
 
-    private int id;
+    private String id;
     private String headline;
     private String author;
-    private int time;
+    private long time;
     private int points;
     private int commentCount;
+    private List<String> commentIds;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,11 +39,11 @@ public class Topic {
         this.author = author;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -58,5 +61,13 @@ public class Topic {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public List<String> getCommentIds() {
+        return commentIds;
+    }
+
+    public void setCommentIds(List<String> commentIds) {
+        this.commentIds = commentIds;
     }
 }

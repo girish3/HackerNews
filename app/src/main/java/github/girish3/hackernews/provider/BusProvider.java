@@ -13,10 +13,7 @@ public class BusProvider {
     private BusProvider() {
     }
 
-    ;
-
     public static Bus getBusInstance() {
-
         return BUS;
     }
 }
