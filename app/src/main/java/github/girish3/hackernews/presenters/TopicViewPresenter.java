@@ -1,12 +1,12 @@
 package github.girish3.hackernews.presenters;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import github.girish3.hackernews.Constants;
+import github.girish3.hackernews.R;
 import github.girish3.hackernews.data.Topic;
-import github.girish3.hackernews.provider.RetrofitProvider;
+import github.girish3.hackernews.providers.RetrofitProvider;
 import github.girish3.hackernews.retrofit_services.TopicListService;
 import github.girish3.hackernews.retrofit_services.TopicService;
 import github.girish3.hackernews.views.TopicView;
@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 public class TopicViewPresenter implements Callback<Topic>, ViewPresenter {
 
     private final Retrofit mRetrofit;
-    private TopicView mView;
+    private final TopicView mView;
     private List<String> mIds;
     private Topic[] mTopics = new Topic[Constants.TOPIC_LIST_SIZE];
     private int sizeSoFar = 0;
@@ -33,8 +33,10 @@ public class TopicViewPresenter implements Callback<Topic>, ViewPresenter {
 
     @Override
     public void onStart() {
+        sizeSoFar = 0;
         TopicListService service = mRetrofit.create(TopicListService.class);
         Call<List<String>> idsCall = service.listTopicIds();
+        mView.showLoading();
         idsCall.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -44,14 +46,14 @@ public class TopicViewPresenter implements Callback<Topic>, ViewPresenter {
                 TopicService service = mRetrofit.create(TopicService.class);
 
                 for (int i = 0; i < Constants.TOPIC_LIST_SIZE; i++) {
-                    Call<Topic> topicCall = service.getTopic(mIds.get(i));
+                    Call<Topic> topicCall = service.getItem(mIds.get(i));
                     topicCall.enqueue(TopicViewPresenter.this);
                 }
             }
 
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
-                int b = 6;
+                mView.showError();
             }
         });
     }
@@ -69,12 +71,13 @@ public class TopicViewPresenter implements Callback<Topic>, ViewPresenter {
         sizeSoFar++;
 
         if (sizeSoFar >= Constants.TOPIC_LIST_SIZE) {
+            mView.hideLoading();
             mView.showTopics(Arrays.asList(mTopics));
         }
     }
 
     @Override
     public void onFailure(Call<Topic> call, Throwable t) {
-        mView.showError("there was an error");
+        mView.showError();
     }
 }

@@ -6,5 +6,5 @@ package github.girish3.hackernews;
 public class Constants {
 
     public static final String HOST = "https://hacker-news.firebaseio.com/";
-    public static final int TOPIC_LIST_SIZE = 10;
+    public static final int TOPIC_LIST_SIZE = 15;
 }

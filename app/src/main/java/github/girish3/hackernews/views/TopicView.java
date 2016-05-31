@@ -15,7 +15,7 @@ public interface TopicView {
 
     void hideLoading();
 
-    void showError(String error);
+    void showError();
 
     void hideError();
 

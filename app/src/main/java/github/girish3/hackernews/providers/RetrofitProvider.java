@@ -1,4 +1,4 @@
-package github.girish3.hackernews.provider;
+package github.girish3.hackernews.providers;
 
 
 import github.girish3.hackernews.Constants;

@@ -1,4 +1,4 @@
-package github.girish3.hackernews.deserializer;
+package github.girish3.hackernews.deserializers;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -9,7 +9,6 @@ import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.List;
 
 import github.girish3.hackernews.data.Topic;
 
