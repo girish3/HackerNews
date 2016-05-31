@@ -27,7 +27,8 @@ public class TopicDeserializer implements JsonDeserializer<Topic> {
         String headline = object.get("title").getAsString();
         long time = object.get("time").getAsLong();
         int points = object.get("score").getAsInt();
-        int commentCount = object.get("descendants").getAsInt();
+        int commentCount = 0;
+        if (object.has("descendants")) commentCount = object.get("descendants").getAsInt();
         JsonArray jsonIdArray;
         String[] commentIds = null;
 
