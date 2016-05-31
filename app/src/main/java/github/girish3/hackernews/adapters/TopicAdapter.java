@@ -50,6 +50,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvAuthor.setText(mContext.getString(R.string.author_text, topic.getAuthor()));
         holder.tvTime.setText(TimeDiff.getTimeAgo(topic.getTime()));
         holder.tvCommentCount.setText(mContext.getString(R.string.comment_text, topic.getCommentCount()));
+        holder.tvNumber.setText((position + 1) + ".");
     }
 
     private String getFormattedTime(long time) {
@@ -81,6 +82,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
         @Bind(R.id.comment_count)
         TextView tvCommentCount;
+
+        @Bind(R.id.number_text)
+        TextView tvNumber;
 
         public ViewHolder(View itemView) {
             super(itemView);
