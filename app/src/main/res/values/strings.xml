@@ -6,4 +6,7 @@
     <string name="points_text">%d points</string>
     <string name="author_text">by %s</string>
     <string name="comment_text">| %d comments</string>
+    <string name="no_comments">There are no comments yet to this story.</string>
+    <string name="error_text">there was an error</string>
+    <string name="fetch_error">There was an error in fetching</string>
 </resources>
