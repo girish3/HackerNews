@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment implements TopicView, TopicAdapter.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mParentActivity = (HomeActivity) getActivity();
     }
 
@@ -101,6 +100,8 @@ public class HomeFragment extends Fragment implements TopicView, TopicAdapter.On
 
     @Override
     public void showError() {
+        mRefreshLayout.setRefreshing(false);
+        hideLoading();
         mParentActivity.showToast(mParentActivity.getString(R.string.fetch_error));
     }
 

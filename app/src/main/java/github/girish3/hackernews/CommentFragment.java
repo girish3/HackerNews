@@ -93,6 +93,7 @@ public class CommentFragment extends Fragment implements CommentView {
 
     @Override
     public void showError() {
+        hideLoading();
         mParentActivity.showToast(mParentActivity.getString(R.string.fetch_error));
     }
 

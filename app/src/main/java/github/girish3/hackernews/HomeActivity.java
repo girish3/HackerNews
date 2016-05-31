@@ -1,24 +1,16 @@
 package github.girish3.hackernews;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.squareup.otto.Bus;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
-
-    @Bind(R.id.fragment_container)
-    FrameLayout mFragmentContainer;
 
     @Bind(R.id.progress_bar_layout)
     View mProgressBar;
