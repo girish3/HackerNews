@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import github.girish3.hackernews.R;
+import github.girish3.hackernews.TimeDiff;
 import github.girish3.hackernews.data.Topic;
 
 /**
@@ -22,10 +22,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
     private final List<Topic> mTopics;
     private final Context mContext;
+    private OnItemClickListener mListener;
 
-    public TopicAdapter(Context context, List<Topic> topics) {
+    public TopicAdapter(Context context, List<Topic> topics, OnItemClickListener listener) {
         mTopics = topics;
         mContext = context;
+        mListener = listener;
     }
 
 
@@ -46,7 +48,7 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         holder.tvHeadline.setText(topic.getHeadline());
         holder.tvPoints.setText(mContext.getString(R.string.points_text, topic.getPoints()));
         holder.tvAuthor.setText(mContext.getString(R.string.author_text, topic.getAuthor()));
-        holder.tvTime.setText(getFormattedTime(topic.getTime()));
+        holder.tvTime.setText(TimeDiff.getTimeAgo(topic.getTime()));
         holder.tvCommentCount.setText(mContext.getString(R.string.comment_text, topic.getCommentCount()));
     }
 
@@ -59,7 +61,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         return mTopics.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public interface OnItemClickListener {
+        void onItemClick(Topic topic);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @Bind(R.id.headline)
         TextView tvHeadline;
@@ -79,6 +85,12 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null) mListener.onItemClick(mTopics.get(getAdapterPosition()));
         }
     }
 }
